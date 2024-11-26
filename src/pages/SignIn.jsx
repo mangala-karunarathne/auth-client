@@ -1,9 +1,7 @@
-import React from 'react'
+import React, { useState } from "react";
 
-export default function SignIn() {
-  return (
-    <div>
-      Signin
-    </div>
-  )
+function SignIn() {
+  return <div>SignIn</div>;
 }
+
+export default SignIn;
