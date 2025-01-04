@@ -64,14 +64,16 @@ export default function Profile() {
           onChange={(e) => setImage(e.target.files[0])}
         />
         <img
-          src={currentUser.profilePicture}
+          src={formData.profilePicture || currentUser.profilePicture}
           alt="Profile"
           className="h-24 w-24 self-center cursor-pointer rounded-full object-cover mt-2"
           onClick={() => fileRef.current.click()}
         />
         <p className="text-sm self-center">
           {imageError ? (
-            <span className="text-red-700">Error Uploading Image (File size should be less tha 2 MB)</span>
+            <span className="text-red-700">
+              Error Uploading Image (File size should be less tha 2 MB)
+            </span>
           ) : imagePercent > 0 && imagePercent < 100 ? (
             <span className="text-slate-700">
               {`Uploading : ${imagePercent} % `}
