@@ -21,8 +21,9 @@ export default function Profile() {
   const [imagePercent, setImagePercent] = useState(0);
   const [imageError, setImageError] = useState(false);
   const [formData, setFormData] = useState({});
+  const [updateSucces, setUpdateSucces] = useState(false);
 
-  const { currentUser } = useSelector((state) => state.user);
+  const { currentUser, loading, error } = useSelector((state) => state.user);
   useEffect(() => {
     if (image) {
       handleFileUpload(image);
@@ -81,6 +82,7 @@ export default function Profile() {
         return;
       }
       dispatch(updateUserSuccess(data));
+      setUpdateSucces(true);
     } catch (error) {
       dispatch(updateUserFailure(error));
     }
@@ -147,13 +149,17 @@ export default function Profile() {
           className="bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-90 disabled:opacity-75
           "
         >
-          Update
+          {loading ? "Loading..." : "Update"}
         </button>
       </form>
       <div className="flex justify-between mt-5">
         <span className="text-red-700 cursor-pointer">Delete Account</span>
         <span className="text-red-700 cursor-pointer">Sign Out</span>
       </div>
+      <p className="text-red-700 mt-5">{error && "Something went wrong!"}</p>
+      <p className="text-green-700 mt-5">
+        {updateSucces && "User is Updated Successfully!"}
+      </p>
     </div>
   );
 }
